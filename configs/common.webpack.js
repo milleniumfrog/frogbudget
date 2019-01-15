@@ -10,14 +10,16 @@ module.exports = {
 	},
 	output: {
 		path: path.resolve(__dirname, '../dist'),
-		filename: "[name]." + VERSION + ".js",
-		chunkFilename: "[name].chunk." + VERSION + ".js"
+		filename: (chunkData) => {
+			return chunkData.chunk.name === 'sw' ? '[name].js': '[name].' + VERSION + '.js'
+		},
+		chunkFilename: '[name].chunk.' + VERSION + '.js'
 	},
 
 	resolve: {
-		extensions: [".ts", ".tsx", ".scss", ".js"],
+		extensions: ['.ts', '.tsx', '.scss', '.js'],
 		alias: {
-			logupts: "logupts/dist/es2015/logupts"
+			logupts: 'logupts/dist/es2015/logupts'
 		}
 	},
 
@@ -26,8 +28,8 @@ module.exports = {
 			template: path.resolve(__dirname, '../src/pwa/index.html'),
 		}),
 		new MiniCSS( {
-			filename: "[name]." + VERSION + ".css",
-			chunk: "[name].chunk." + VERSION + ".css"
+			filename: '[name].' + VERSION + '.css',
+			chunk: '[name].chunk.' + VERSION + '.css'
 		} ),
 	],
 
@@ -36,7 +38,7 @@ module.exports = {
 			// typescript loader
 			{
 				test: /\.tsx?$/,
-				loader: "awesome-typescript-loader"
+				loader: 'awesome-typescript-loader'
 			},
 
 			{
@@ -46,8 +48,8 @@ module.exports = {
 					{
 						loader: MiniCSS.loader,
 					},
-					"css-loader",
-					"sass-loader",
+					'css-loader',
+					'sass-loader',
 				]
 			},
 
@@ -59,7 +61,7 @@ module.exports = {
 					{
 						loader: MiniCSS.loader,
 					},
-					"css-loader",
+					'css-loader',
 				]
 			},
 

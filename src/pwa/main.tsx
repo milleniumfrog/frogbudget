@@ -18,7 +18,5 @@ ReactDom.render(<App />, document.getElementById('app'));
 })();
 
 if(PRODUCTION && 'serviceWorker' in window.navigator) {
-	navigator.serviceWorker.register(`sw.${VERSION}.js`, {
-		scope: './controlled'
-	  });
+	navigator.serviceWorker.register(`sw.js`);
 }
