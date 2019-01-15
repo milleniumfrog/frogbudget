@@ -69,10 +69,16 @@ module.exports = {
 				use: [
 					{
 						loader: 'file-loader',
-						options: '[path][name].[ext]'
+						options: {
+							name: '[name].' + VERSION + '.[ext]'
+						}	
 					}
 				]
 			}
 		]
-	}
+	},
+	performance: {
+		maxAssetSize: 1024000,
+		maxEntrypointSize: 1024000
+	},
 }

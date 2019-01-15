@@ -1,6 +1,7 @@
 const merge = require('webpack-merge');
 const common = require('./common.webpack');
 const DefinePlugin = require('webpack').DefinePlugin;
+const VERSION = process.env.npm_package_version;
 
 
 module.exports = merge(common, {
@@ -8,6 +9,7 @@ module.exports = merge(common, {
 	plugins: [
 		new DefinePlugin({
 			PRODUCTION: JSON.stringify( true ),
+			VERSION: JSON.stringify(VERSION)
 		}),
 	],
 

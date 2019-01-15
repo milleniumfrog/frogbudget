@@ -9,7 +9,7 @@ module.exports = merge(common, {
 	plugins: [
 		new DefinePlugin({
 			PRODUCTION: JSON.stringify( false ),
-			VERSION
+			VERSION: JSON.stringify(VERSION),
 		}),
 	],
 
