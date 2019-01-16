@@ -32,6 +32,7 @@ class HomePage extends React.Component<Props, State>{
 	}
 
 	render() {
+		let arr: string[] = [];
 		return (
 			<Page>
 				<Card>
@@ -41,8 +42,20 @@ class HomePage extends React.Component<Props, State>{
 				<List 
 					dataSource={this.props.entries}
 					renderRow={(row: Entry) => {
+						if(arr.indexOf(new Date(row.date).toDateString()) < 0) {
+							
+						}
 						return (
 							<ListItem key={row.id}>
+								{
+									arr.indexOf(new Date(row.date).toDateString()) < 0 &&
+									(() => {
+										arr.push(new Date(row.date).toDateString())
+										console.log(arr);
+										return true;
+									})() && 
+									<Row><Col style={{backgroundColor: 'blue', color: 'white'}}>{new Date(row.date).toDateString()}</Col></Row>
+								}
 								<Row>
 									<Col>
 										{row.category}
