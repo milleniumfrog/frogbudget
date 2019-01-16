@@ -50,7 +50,7 @@ async function precache() {
 			'Material-Design-Iconic-Font.d2a55d331bdd1a7ea97a8a1fbb3c569c.woff',
 			// own code
 			'index.html',
-			'/',
+			'/frogbudget/',
 			'icons-df37451e1a7c92800a2e47065a4f3d72/favicon.ico',
 			`sw.js`,
 			`pwa.${VERSION}.js`,

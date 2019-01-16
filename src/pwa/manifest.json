@@ -6,7 +6,7 @@
 	"lang": "de-DE",
 	"display": "standalone",
 	"orientation": "any",
-	"start_url": "/",
+	"start_url": "/frogbudget/",
 	"background_color": "#fff",
 	"icons": [
 	  {
