@@ -9,7 +9,7 @@ module.exports = {
 		sw: path.resolve(__dirname, '../src/pwa/sw.ts')
 	},
 	output: {
-		path: path.resolve(__dirname, '../dist'),
+		path: path.resolve(__dirname, '../docs'),
 		filename: (chunkData) => {
 			return chunkData.chunk.name === 'sw' ? '[name].js': '[name].' + VERSION + '.js'
 		},
