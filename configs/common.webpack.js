@@ -72,7 +72,7 @@ module.exports = {
 					{
 						loader: 'file-loader',
 						options: {
-							name: '[name].' + VERSION + '.[ext]'
+							name: '[name].[hash].[ext]'
 						}	
 					}
 				]
