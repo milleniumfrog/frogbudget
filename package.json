@@ -2,7 +2,6 @@
   "name": "frogbudget",
   "version": "0.0.6",
   "description": "manage your bucks",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config ./configs/prod.webpack.js && cp -f src/pwa/manifest.json docs/manifest.json",
