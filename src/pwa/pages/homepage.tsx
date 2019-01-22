@@ -42,34 +42,37 @@ class HomePage extends React.Component<Props, State>{
 				<List 
 					dataSource={this.props.entries}
 					renderRow={(row: Entry) => {
-						if(arr.indexOf(new Date(row.date).toDateString()) < 0) {
-							
+						if (arr.indexOf(new Date(row.date).toDateString()) < 0) {
+
 						}
 						return (
-							<ListItem key={row.id}>
+							<React.Fragment key={row.id}>
 								{
 									arr.indexOf(new Date(row.date).toDateString()) < 0 &&
 									(() => {
 										arr.push(new Date(row.date).toDateString())
-										console.log(arr);
 										return true;
-									})() && 
-									<Row><Col style={{backgroundColor: 'blue', color: 'white'}}>{new Date(row.date).toDateString()}</Col></Row>
+									})() &&
+									<ListItem className="homepage_date" modifier="nodivider">
+										<Row><Col>{new Date(row.date).toDateString()}</Col></Row>
+									</ListItem>
 								}
-								<Row>
-									<Col>
-										{row.category}
+								<ListItem modifier="longdivider">
+									<Row>
+										<Col>
+											{row.category}
+										</Col>
+										<Col width="100px">
+											{row.value}€
 									</Col>
-									<Col width="100px">
-										{row.value}€
-									</Col>
-									<Col width="40px">
-									<Button onClick={() => { removeEntry(row); store.dispatch(removeActionCreator(row))}}>
-										<Icon icon="md-delete" />
-									</Button>
-								</Col>
-								</Row>
-							</ListItem>
+										<Col width="40px">
+											<Button onClick={() => { removeEntry(row); store.dispatch(removeActionCreator(row)) }}>
+												<Icon icon="md-delete" />
+											</Button>
+										</Col>
+									</Row>
+								</ListItem>
+							</React.Fragment>
 						)
 					}}
 				/>

@@ -8,6 +8,7 @@ import { getAllEntries } from './providers/database/entries';
 import { Entry } from '../types/entry';
 import { setentriesActionCreator } from './providers/redux/actions/entries';
 import { store } from './providers/redux/store';
+import './main.scss';
 
 ReactDom.render(<App />, document.getElementById('app'));
 
