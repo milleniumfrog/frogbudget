@@ -9,7 +9,9 @@ import { Entry } from '../types/entry';
 import { setentriesActionCreator } from './providers/redux/actions/entries';
 import { store } from './providers/redux/store';
 import './main.scss';
+import { logger } from './providers/logger';
 
+logger.log("Start app");
 ReactDom.render(<App />, document.getElementById('app'));
 
 // get entries from db and set redux store

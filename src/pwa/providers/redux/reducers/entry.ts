@@ -1,8 +1,10 @@
 import { Entry } from "../../../../types/entry";
 import { Action } from "redux";
 import { ADD, REMOVE, SET_ENTRIES } from "../actions/entries";
+import { reduxlogger } from "../../logger";
 
 export function entryReducer(state: Entry[] = [], action: Action & {entries?: Entry[], entry?: Entry}) {
+	reduxlogger.log("call reducer with action " + action.type);
 	switch(action.type) {
 		case ADD:
 			if(!action.entry)

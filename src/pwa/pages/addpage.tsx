@@ -6,12 +6,14 @@ import { getID } from '../providers/id';
 import * as EntryDB from '../providers/database/entries';
 import * as EntryActions from '../providers/redux/actions/entries';
 import { store } from '../providers/redux/store';
+import { logger } from '../providers/logger';
 
 export class AddPage extends React.Component<{}, {returnToHome: boolean}> {
 
 	input_entry: Entry;
 
 	constructor(props: any) {
+		logger.construct("addpage");
 		super(props);
 		this.input_entry = {
 			date: new Date().toISOString(),

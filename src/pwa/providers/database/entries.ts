@@ -1,19 +1,23 @@
 import * as localforage from 'localforage';
 import { Entry } from '../../../types/entry';
+import { dblogger } from '../logger';
 
 const entryDb = localforage.createInstance({ name: 'entry' });
 
 export async function addEntry(entry: Entry): Promise<Entry> {
+	dblogger.log("add entry")
 	await entryDb.setItem(entry.id, entry);
 	return entry;
 }
 
 export async function removeEntry(entry: Entry): Promise<Entry> {
+	await dblogger.log("remove an entry")
 	await entryDb.removeItem(entry.id);
 	return entry;
 }
 
 export async function getAllEntries() {
+	dblogger.log("get all entries")
 	let sortedArr: Entry[] = [];
 	// add data unsorted
 	await entryDb.iterate((entry: Entry) => {

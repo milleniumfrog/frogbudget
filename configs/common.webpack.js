@@ -35,6 +35,12 @@ module.exports = {
 
 	module: {
 		rules: [
+			// preload sourcemaps from third party libs
+			{
+				test: /\.js$/,
+				use: ["source-map-loader"],
+				enforce: "pre"
+			},
 			// typescript loader
 			{
 				test: /\.tsx?$/,

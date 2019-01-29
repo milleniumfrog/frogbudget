@@ -7,6 +7,7 @@ import { withRouter } from 'react-router';
 import { removeEntry } from '../providers/database/entries';
 import { removeActionCreator } from '../providers/redux/actions/entries';
 import { store } from '../providers/redux/store';
+import { logger } from '../providers/logger';
 
 interface Props {
 	entries: Entry[]
@@ -25,6 +26,7 @@ class HomePage extends React.Component<Props, State>{
 	})
 
 	constructor(props: Props) {
+		logger.construct("homepage");
 		super(props);
 		this.state = {
 			total: 0,
