@@ -1,3 +1,5 @@
+import { Repeat } from "./repeats";
+
 export interface Entry {
 	value: number;
 	/** Date Isostring */

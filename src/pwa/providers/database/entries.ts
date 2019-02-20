@@ -5,19 +5,19 @@ import { dblogger } from '../logger';
 const entryDb = localforage.createInstance({ name: 'entry' });
 
 export async function addEntry(entry: Entry): Promise<Entry> {
-	dblogger.log("add entry")
+	dblogger.log('add entry')
 	await entryDb.setItem(entry.id, entry);
 	return entry;
 }
 
 export async function removeEntry(entry: Entry): Promise<Entry> {
-	await dblogger.log("remove an entry")
+	dblogger.log('remove entry ' +  entry.id);
 	await entryDb.removeItem(entry.id);
 	return entry;
 }
 
 export async function getAllEntries() {
-	dblogger.log("get all entries")
+	dblogger.log('get all entries')
 	let sortedArr: Entry[] = [];
 	// add data unsorted
 	await entryDb.iterate((entry: Entry) => {

@@ -1,20 +1,24 @@
 import React from 'react';
 import { connect } from "react-redux";
-import { mapStateToProps } from "../providers/redux/connectors/entries";
-import { Page, Card, List, ListItem, Row, Col, Fab, Icon, Button } from 'react-onsenui';
+import { mapStateToProps } from "../providers/redux/connector";
+import { Page, Card, List, ListItem, Row, Col, Fab, Icon, Button, Splitter, SplitterSide, SplitterContent } from 'react-onsenui';
 import { Entry } from '../../types/entry';
 import { withRouter } from 'react-router';
 import { removeEntry } from '../providers/database/entries';
 import { removeActionCreator } from '../providers/redux/actions/entries';
 import { store } from '../providers/redux/store';
 import { logger } from '../providers/logger';
+import { generateEntriesFromRepeats } from '../providers/universal/entries_and_repeats';
 
 interface Props {
 	entries: Entry[]
 }
 interface State {
-	total: number
+	total: number,
+	slice: number;
 }
+
+let counter = 0;
 
 class HomePage extends React.Component<Props, State>{
 
@@ -30,10 +34,13 @@ class HomePage extends React.Component<Props, State>{
 		super(props);
 		this.state = {
 			total: 0,
+			slice: 0,
 		}
+		generateEntriesFromRepeats();
 	}
 
 	render() {
+		logger.info("RENDER homepage");
 		let arr: string[] = [];
 		return (
 			<Page>
@@ -42,13 +49,13 @@ class HomePage extends React.Component<Props, State>{
 				</Card>
 
 				<List 
-					dataSource={this.props.entries}
+					dataSource={this.props.entries.slice(this.state.slice*20, 20*(1+this.state.slice))}
 					renderRow={(row: Entry) => {
 						if (arr.indexOf(new Date(row.date).toDateString()) < 0) {
 
 						}
 						return (
-							<React.Fragment key={row.id}>
+							<React.Fragment key={row.id || `tmp_${++counter}`}>
 								{
 									arr.indexOf(new Date(row.date).toDateString()) < 0 &&
 									(() => {
@@ -78,6 +85,14 @@ class HomePage extends React.Component<Props, State>{
 						)
 					}}
 				/>
+				<Card>
+					<Button onClick={() => {this.setState({slice: this.state.slice-1})}}>
+						Vorherigen 20
+					</Button>
+					<Button onClick={() => {this.setState({slice: this.state.slice+1})}}>
+						Nächsten 20
+					</Button>
+				</Card>
 				<HomePage.Fab />
 			</Page>
 		)
