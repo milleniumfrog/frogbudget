@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///./src/pwa/main.scss"],"names":[],"mappings":"AAAA;AACA;AACA;AACA;AACA,oBAAoB","file":"pwa.0.1.1.css","sourcesContent":[".homepage_date {\n  background-color: #efeff4;\n  color: #6d6d6d;\n  font-size: 12px;\n  line-height: 15px; }\n"],"sourceRoot":""}
