@@ -148,7 +148,7 @@ class HomePage extends React.Component<Props, State>{
 					<Col style={{textAlign: "center", lineHeight: '44px'}}>
 						{this.state.slice*20+1}-{(1+this.state.slice)*20} von {this.props.entries.length}
 					</Col>
-					<ToolbarButton onClick={() => this.setState({slice: this.state.slice+1})}>
+					<ToolbarButton onClick={() => this.setState({slice: (this.state.slice+1)*20 < this.props.entries.length ? this.state.slice+1 : this.state.slice})}>
 						<Icon icon={{ default: "ion-chevron-right" }} size={{default: 30}} style={{paddingTop: '5px'}} />
 					</ToolbarButton>
 				</Row>

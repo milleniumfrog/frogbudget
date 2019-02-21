@@ -1,7 +1,7 @@
 import React from 'react';
 import { Entry } from '../../types/entry';
 import { Redirect, withRouter } from 'react-router';
-import { Page, Card, Input, Button, BackButton, Toolbar, Row, Col, Select } from 'react-onsenui';
+import { Page, Card, Input, Button, BackButton, Toolbar, Row, Col, Select, BottomToolbar, ToolbarButton, Switch } from 'react-onsenui';
 import { getID } from '../providers/id';
 import * as EntryDB from '../providers/database/entries';
 import * as EntryActions from '../providers/redux/actions/entries';
@@ -50,6 +50,7 @@ export class AddPage extends React.Component<{}, State> {
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.renderToolbar = this.renderToolbar.bind(this);
 		this.renderRepeatInput = this.renderRepeatInput.bind(this);
+		this.renderBottomToolbar = this.renderBottomToolbar.bind(this);
 		//#endregion
 	}
 
@@ -59,40 +60,45 @@ export class AddPage extends React.Component<{}, State> {
 			return (<Redirect to="/" />);
 
 		return (
-			<Page renderToolbar={this.renderToolbar}>
+			<Page renderToolbar={this.renderToolbar} renderBottomToolbar={this.renderBottomToolbar}>
+				<Card>
+					<Row>
+						<Col style={{lineHeight: '24px'}}>Wiederholung</Col>
+						<Switch onChange={() => this.setState({pagestate: this.state.pagestate !== 'entry' ? 'entry' : 'repeat'})}/>
+					</Row>
+		
+				</Card>
 				{this.state.pagestate === 'entry' && this.renderEntryInput()}
 				{this.state.pagestate === 'repeat' && this.renderRepeatInput()}
-				<Card>
-					<Button onClick={this.handleSubmit}>
-						Hinzufügen
-					</Button>
-				</Card>
 			</Page>
 		)
 	}
 
 	//#region Renderfunctions
 	renderToolbar() {
-		let BackBtn = withRouter(({ history }) => { return <BackButton onClick={() => history.push("/")} /> })
 		return (
 			<Toolbar>
-				<div className='left'>
-					<BackBtn />
-				</div>
-				<Row className='center'>
-					<Col verticalAlign='center'>
-						<Button modifier="large--flat" className='center' onClick={() => this.setState({pagestate: 'entry'})}>
-							Eintrag
-						</Button>
-					</Col>
-					<Col verticalAlign='center'>
-						<Button modifier="large--flat" className='center' onClick={() => this.setState({pagestate: 'repeat'})}>
-							Wiederholungen
-						</Button>
-					</Col>
-				</Row>
+				<ToolbarButton onClick={() => this.setState({pagestate: 'backToHome'})}>
+					<BackButton />
+				</ToolbarButton>
+				<h4 style={{margin: 0, lineHeight: '60px'}}>
+					Erstelle {this.state.pagestate === 'entry' ? 'Eintrag' : 'Wiederholung'}
+				</h4>
 			</Toolbar>
 		);
+	}
+
+	renderBottomToolbar() {
+		return(
+			<BottomToolbar>
+				<ToolbarButton 
+					style={{margin: 0, padding: 0, lineHeight: '44px', width: '100%', textAlign: 'center'}}
+					onClick={this.handleSubmit}
+				>
+					Hinzufügen
+				</ToolbarButton>
+			</BottomToolbar>
+		)
 	}
 
 	renderEntryInput() {
@@ -141,12 +147,18 @@ export class AddPage extends React.Component<{}, State> {
 						/>
 				</Card>
 				<Card>
-					<Button modifier='large--flat' onClick={() => this.setState({repeattype: 'weekly'})}>
-						Wöchentlich
-					</Button>
-					<Button onClick={() => this.setState({repeattype: 'monthly'})}>
-						Monatlich
-					</Button>
+					<Row>
+						<Col>
+							<Button modifier={this.state.repeattype === 'weekly' ? 'cta' : 'light'} style={{width: '100%'}}  onClick={() => this.setState({repeattype: 'weekly'})}>
+								Wöchentlich
+							</Button>
+						</Col>
+						<Col>
+							<Button modifier={this.state.repeattype !== 'weekly' ? 'cta' : 'light'} style={{width: '100%'}} onClick={() => this.setState({repeattype: 'monthly'})}>
+								Monatlich
+							</Button>
+						</Col>
+					</Row>
 				</Card>
 				{this.state.repeattype === 'weekly' &&
 					<Card>
@@ -188,6 +200,24 @@ export class AddPage extends React.Component<{}, State> {
 						<option value='8'>8</option>
 						<option value='9'>9</option>
 						<option value='10'>10</option>
+						<option value='11'>11</option>
+						<option value='12'>12</option>
+						<option value='13'>13</option>
+						<option value='14'>14</option>
+						<option value='15'>15</option>
+						<option value='16'>16</option>
+						<option value='17'>17</option>
+						<option value='18'>18</option>
+						<option value='19'>19</option>
+						<option value='20'>20</option>
+						<option value='21'>21</option>
+						<option value='22'>22</option>
+						<option value='23'>23</option>
+						<option value='24'>24</option>
+						<option value='25'>25</option>
+						<option value='26'>26</option>
+						<option value='27'>27</option>
+						<option value='28'>28</option>
 
 					</Select>
 				</Card>
