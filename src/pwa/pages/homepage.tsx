@@ -132,7 +132,7 @@ class HomePage extends React.Component<Props, State>{
 					<Icon icon={{default: 'ion-navicon'}} size={{default: 50}}/>
 				</ToolbarButton>
 				<h3 style={{paddingRight: '20px',margin: 0, lineHeight: '60px', textAlign: 'right', width: '100%',}}>
-					{calcTotal(this.props.entries)} €
+					{calcTotal(this.props.entries).toFixed(2)} €
 				</h3>
 			</Toolbar>
 		);
