@@ -56,6 +56,7 @@ async function precache() {
 			`pwa.${VERSION}.js`,
 			`vendors~pwa.chunk.${VERSION}.js`,
 			`vendors~pwa.${VERSION}.css`,
+			`pwa.${VERSION}.css`
 		]);
 	}
 }
