@@ -89,3 +89,8 @@ export async function addEntries(entries: Entry[]) {
 export async function addRepeat(repeat: Repeat) {
 	await RepeatDB.addRepeat(repeat);
 }
+
+export async function removeEntry(entry: Entry) {
+	await EntryDB.removeEntry(entry);
+	store.dispatch(EntryActions.removeActionCreator(entry));
+}

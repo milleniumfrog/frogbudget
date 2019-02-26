@@ -10,6 +10,12 @@ export async function addEntry(entry: Entry): Promise<Entry> {
 	return entry;
 }
 
+export async function getEntry(id: string): Promise<Entry> {
+	dblogger.log('get entry #' + id);
+	let entry = await entryDb.getItem<Entry>(id);
+	return entry;
+}
+
 export async function removeEntry(entry: Entry): Promise<Entry> {
 	dblogger.log('remove entry ' +  entry.id);
 	await entryDb.removeItem(entry.id);

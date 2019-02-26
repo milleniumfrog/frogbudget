@@ -9,3 +9,12 @@ export interface Entry {
 	id: string;
 	category: string;
 }
+
+
+export const defaultEntry = {
+	value: 0,
+	date: new Date().toISOString(),
+	note: '',
+	id: '-1',
+	category: 'default'
+}

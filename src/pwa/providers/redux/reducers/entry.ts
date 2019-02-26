@@ -10,6 +10,13 @@ export function entryReducer(state: Entry[] = [], action: Action & {entries?: En
 			if(!action.entry)
 				throw new Error('tries to add an empty entry');
 			state = [...state];
+			let duplicateIndex: number = state.findIndex((entry: Entry) => {
+				if(action.entry && entry.id === action.entry.id)
+					return true;
+				return false;
+			});
+			if(-1 !== duplicateIndex)
+				state.splice(duplicateIndex, 1);
 			state.push(action.entry);
 			state.sort((a: Entry, b: Entry) => {
 				const aDate = new Date(a.date);
