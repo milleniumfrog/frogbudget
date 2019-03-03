@@ -52,7 +52,6 @@ async function precache() {
 			'index.html',
 			'/frogbudget/',
 			'icons-df37451e1a7c92800a2e47065a4f3d72/favicon.ico',
-			`sw.js`,
 			`pwa.${VERSION}.js`,
 			`vendors~pwa.chunk.${VERSION}.js`,
 			`vendors~pwa.${VERSION}.css`,
