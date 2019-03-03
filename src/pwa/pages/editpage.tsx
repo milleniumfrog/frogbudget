@@ -59,6 +59,7 @@ export class Editpage extends React.Component<Props, State> {
 				<Card>
 					<label htmlFor='input_date_change'>Datum:</label>
 					<Input style={{ width: "100%" }} inputId='input_date_change' type="date" placeholder='Datum:' value={normalizeDate(this.state.tmpEntry.date)}
+					onChange={(ev) => {this.setState({tmpEntry: Object.assign(this.state.tmpEntry, {date: new Date(ev.target.value).toISOString()})})}}
 					/>
 				</Card>
 				<Card>
@@ -90,7 +91,7 @@ export class Editpage extends React.Component<Props, State> {
 						style={{margin: 0, padding: 0, lineHeight: '44px'}}
 						onClick={this.handleSubmit}
 					>
-						Hinzufügen
+						Update
 					</ToolbarButton>
 					<Col />	
 				</Row>				
