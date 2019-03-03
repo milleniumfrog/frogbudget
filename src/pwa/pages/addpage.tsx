@@ -2,16 +2,15 @@ import React from 'react';
 import { Entry } from '../../types/entry';
 import { Redirect, withRouter } from 'react-router';
 import { Page, Card, Input, Button, BackButton, Toolbar, Row, Col, Select, BottomToolbar, ToolbarButton, Switch } from 'react-onsenui';
+import { platform } from 'onsenui';
 import { getID } from '../providers/id';
-import * as EntryDB from '../providers/database/entries';
-import * as EntryActions from '../providers/redux/actions/entries';
 import * as RepeatDB from '../providers/database/repeats';
 import * as RepeatActions from '../providers/redux/actions/repeats';
 import { store } from '../providers/redux/store';
 import { logger } from '../providers/logger';
 import { Repeat } from '../../types/repeats';
-import { BackgroundAttachmentProperty } from 'csstype';
 import { addEntry } from '../providers/universal/entries_and_repeats';
+import { normalizeDate } from '../providers/strutil';
 
 interface State {
 	pagestate: string;
@@ -90,13 +89,17 @@ export class AddPage extends React.Component<{}, State> {
 
 	renderBottomToolbar() {
 		return(
-			<BottomToolbar>
-				<ToolbarButton 
-					style={{margin: 0, padding: 0, lineHeight: '44px', width: '100%', textAlign: 'center'}}
-					onClick={this.handleSubmit}
-				>
-					Hinzufügen
-				</ToolbarButton>
+			<BottomToolbar style={{height: platform.isAndroid() ? '45px' : '60px'}}>
+				<Row>
+					<Col />
+					<ToolbarButton className='center'
+						style={{margin: 0, padding: 0, lineHeight: '44px'}}
+						onClick={this.handleSubmit}
+					>
+						Hinzufügen
+					</ToolbarButton>
+					<Col />	
+				</Row>				
 			</BottomToolbar>
 		)
 	}
@@ -110,7 +113,8 @@ export class AddPage extends React.Component<{}, State> {
 					/>
 				</Card>
 				<Card>
-					<Input style={{ width: "100%" }} type="date" placeholder='Datum:'
+					<label htmlFor='input_date'>Datum:</label>
+					<Input style={{ width: "100%" }} type="date" id='input_date' defaultValue={normalizeDate(new Date())}
 						onChange={ev => this.input_entry.date = new Date(ev.target.value).toISOString()}
 					/>
 				</Card>
@@ -137,12 +141,14 @@ export class AddPage extends React.Component<{}, State> {
 						/>
 				</Card>
 				<Card>
-					<Input style={{width: '100%'}} type='date' placeholder='Begin:'
+					<label htmlFor='input_begin'>Von:</label>
+					<Input style={{width: '100%'}} type='date' inputId='input_begin' defaultValue={normalizeDate(new Date())}
 						onChange={(ev: any) => this.input_repeat.begin = new Date(ev.target.value).toISOString()} 
 						/>
 				</Card>
 				<Card>
-					<Input style={{width: '100%'}} type='date' placeholder='Ende:'
+					<label htmlFor='input_end'>Bis:</label>
+					<Input style={{width: '100%'}} type='date' inputId='input_end' defaultValue={normalizeDate(new Date())}
 						onChange={(ev: any) => this.input_repeat.end = new Date(ev.target.value).toISOString()} 
 						/>
 				</Card>

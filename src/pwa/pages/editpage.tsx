@@ -1,11 +1,13 @@
 import React from 'react';
 import { Entry, defaultEntry } from '../../types/entry';
-import { Page, Toolbar, ToolbarButton, BackButton, Card, Input, BottomToolbar } from 'react-onsenui';
+import { Page, Toolbar, ToolbarButton, BackButton, Card, Input, BottomToolbar, Row, Col } from 'react-onsenui';
 import { Redirect, match } from 'react-router';
 import { getEntry } from '../providers/database/entries';
 import { entryReducer } from '../providers/redux/reducers/entry';
 import { getID } from '../providers/id';
 import { addEntry } from '../providers/universal/entries_and_repeats';
+import { normalizeDate } from '../providers/strutil';
+import { platform } from 'onsenui';
 
 interface State {
 
@@ -55,7 +57,8 @@ export class Editpage extends React.Component<Props, State> {
 					/>
 				</Card>
 				<Card>
-					<Input style={{ width: "100%" }} type="date" placeholder='Datum:' value={this.normalizeDate(this.state.tmpEntry.date)}
+					<label htmlFor='input_date_change'>Datum:</label>
+					<Input style={{ width: "100%" }} inputId='input_date_change' type="date" placeholder='Datum:' value={normalizeDate(this.state.tmpEntry.date)}
 					/>
 				</Card>
 				<Card>
@@ -72,6 +75,7 @@ export class Editpage extends React.Component<Props, State> {
 			<Toolbar>
 				<ToolbarButton>
 					<BackButton onClick={() => {this.setState({pagestate: "backToHome"})}} />
+					Ändere Eintrag
 				</ToolbarButton>
 			</Toolbar>
 		);
@@ -79,34 +83,25 @@ export class Editpage extends React.Component<Props, State> {
 
 	renderBottomToolbar() {
 		return(
-			<BottomToolbar>
-				<ToolbarButton 
-					style={{margin: 0, padding: 0, lineHeight: '44px', width: '100%', textAlign: 'center'}}
-					onClick={this.handleSubmit}
-				>
-					Update
-				</ToolbarButton>
+			<BottomToolbar style={{height: platform.isAndroid() ? '45px' : '60px'}}>
+				<Row>
+					<Col />
+					<ToolbarButton className='center'
+						style={{margin: 0, padding: 0, lineHeight: '44px'}}
+						onClick={this.handleSubmit}
+					>
+						Hinzufügen
+					</ToolbarButton>
+					<Col />	
+				</Row>				
 			</BottomToolbar>
 		)
 	}
 
+
 	async handleSubmit() {
 		addEntry(this.state.tmpEntry);
 		this.setState({pagestate: 'backToHome'});
-	}
-
-	/**
-	 * normalize Date, move this function to other file in future versions TODO
-	 */
-	normalizeDate(dateInput: string | number | Date) {
-		let tmpDate = new Date(dateInput);
-		return `${tmpDate.getFullYear()}-${this.lengthStr(tmpDate.getMonth().toString(), 2)}-${this.lengthStr(tmpDate.getDate().toString(), 2)}`;
-	}
-
-	lengthStr(str: string, wishedLength: number) {
-		while(str.length < wishedLength)
-			str = "0" + str;
-		return str;
 	}
 
 }

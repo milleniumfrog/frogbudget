@@ -7,6 +7,8 @@ import { Redirect } from 'react-router';
 import { removeEntry } from '../providers/universal/entries_and_repeats';
 import { logger } from '../providers/logger';
 import { generateEntriesFromRepeats } from '../providers/universal/entries_and_repeats';
+import { platform } from 'onsenui';
+
 declare const VERSION: string;
 interface Props {
 	entries: Entry[]
@@ -109,7 +111,7 @@ class HomePage extends React.Component<Props, State>{
 								)
 							}}
 						/>
-						<Fab style={{ position: "fixed", bottom: "50px", right: "10px" }} onClick={() => this.setState({redirect: '/add'})}>
+						<Fab style={{ position: "fixed", bottom: platform.isAndroid() ? "50px" : "70px", right: "10px" }} onClick={() => this.setState({redirect: '/add'})}>
 							<Icon icon={{ default: 'fa-plus' }} size={{ default: 32 }} />
 						</Fab>
 					</Page>
@@ -140,10 +142,10 @@ class HomePage extends React.Component<Props, State>{
 	renderToolbar() {
 		return(
 			<Toolbar>
-				<ToolbarButton onClick={() => this.setState({openMenu: true})}>
-					<Icon icon={{default: 'ion-navicon'}} size={{default: 50}}/>
+				<ToolbarButton onClick={() => this.setState({openMenu: true})} className='left'>
+					<Icon icon={{default: 'ion-navicon'}} size={{default: 40, material: 50}}/>
 				</ToolbarButton>
-				<h3 style={{paddingRight: '20px',margin: 0, lineHeight: '60px', textAlign: 'right', width: '100%',}}>
+				<h3 className='right' style={{paddingRight: '20px',margin: 0, lineHeight: '60px', textAlign: 'center', width: '100%',}}>
 					{calcTotal(this.props.entries).toFixed(2)} €
 				</h3>
 			</Toolbar>
@@ -152,7 +154,7 @@ class HomePage extends React.Component<Props, State>{
 
 	renderBottomToolbar() {
 		return (
-			<BottomToolbar>
+			<BottomToolbar style={{height: platform.isAndroid() ? '45px' : '60px'}}>
 				<Row>
 					<ToolbarButton onClick={() => this.setState({slice: this.state.slice === 0 ? this.state.slice : this.state.slice-1})}>
 						<Icon icon={{ default: "ion-chevron-left" }} size={{default: 30}} style={{paddingTop: '5px'}} />
