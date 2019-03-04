@@ -24,3 +24,7 @@ export async function getAllRepeats() {
 	})
 	return allRepeats;
 }
+
+export async function clearRepeatDB() {
+	return repeatsDb.clear();
+}

@@ -1,13 +1,14 @@
 import React from 'react';
 import { connect } from "react-redux";
 import { mapStateToProps } from "../providers/redux/connector";
-import { Page, List, ListItem, Row, Col, Fab, Icon, Button, Splitter, SplitterSide, SplitterContent, Toolbar, ToolbarButton, BottomToolbar } from 'react-onsenui';
+import { Page, List, ListItem, Row, Col, Fab, Icon, Button, Splitter, SplitterSide, SplitterContent, Toolbar, ToolbarButton, BottomToolbar, Card } from 'react-onsenui';
 import { Entry } from '../../types/entry';
 import { Redirect } from 'react-router';
 import { removeEntry } from '../providers/universal/entries_and_repeats';
 import { logger } from '../providers/logger';
 import { generateEntriesFromRepeats } from '../providers/universal/entries_and_repeats';
 import { platform } from 'onsenui';
+import { clearRepeatDB } from '../providers/database/repeats';
 
 declare const VERSION: string;
 interface Props {
@@ -50,12 +51,16 @@ class HomePage extends React.Component<Props, State>{
 				<SplitterSide
 					side="left"
 					collapse={true}
-					width={200}
+					width={window.innerWidth-100}
 					isOpen={this.state.openMenu}
 					onClose={() => {this.setState({openMenu: false})}}
 					swipeable={true}>
 					<Page>
 						<this.MenuLeft />
+						<Card>
+							Lösche alle Wiederholungen um defekte oder falsch angelegt Wiederholungen zu vernichten.
+							<Button modifier='light' onClick={() => {clearRepeatDB()}}>Lösche Wiederholungen</Button>
+						</Card>
 					</Page>
 				</SplitterSide>
 				<SplitterContent>

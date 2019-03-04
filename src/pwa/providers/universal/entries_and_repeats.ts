@@ -33,12 +33,18 @@ export async function getEntriesFromRepeat(repeat: Repeat, optEnd?: Date) {
 	let entries: Entry[] = [];
 	while(beginDate < endDate) {
 		if(repeat.repeattype === 'weekly') {
-			if(repeat.repeats.indexOf(beginDate.getDay()) >= 0)
-				entries.push(Object.assign({}, repeat.template, {date: beginDate.toISOString()}))
+			if(repeat.repeats.indexOf(beginDate.getDay()) >= 0) {
+				let entry: Entry = Object.assign({}, repeat.template, {date: beginDate.toISOString()})
+				if((new Date).getTime() >= new Date(entry.date).getTime())
+					entries.push(entry);
+			}
 		}
 		else {
-			if(repeat.repeats.indexOf(beginDate.getDate()) >= 0)
-				entries.push(Object.assign({}, repeat.template, {date: beginDate.toISOString()}))
+			if(repeat.repeats.indexOf(beginDate.getDate()) >= 0) {
+				let entry: Entry = Object.assign({}, repeat.template, {date: beginDate.toISOString()})
+				if((new Date).getTime() >= new Date(entry.date).getTime())
+					entries.push(entry)
+			}
 		}
 		beginDate.setDate(beginDate.getDate()+1);
 	}
