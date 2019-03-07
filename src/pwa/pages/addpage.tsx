@@ -92,7 +92,7 @@ export class AddPage extends React.Component<{}, State> {
 			<BottomToolbar style={{height: platform.isAndroid() ? '45px' : '60px'}}>
 				<Row>
 					<Col />
-					<ToolbarButton className='center'
+					<ToolbarButton className='center' id='input_submit'
 						style={{margin: 0, padding: 0, lineHeight: '44px'}}
 						onClick={this.handleSubmit}
 					>
@@ -108,18 +108,18 @@ export class AddPage extends React.Component<{}, State> {
 		return (
 			<React.Fragment>
 				<Card>
-					<Input style={{ width: "100%" }} placeholder='Kategorie:'
+					<Input style={{ width: "100%" }} placeholder='Kategorie:' inputId='input_category_entry'
 						onChange={(ev: any) => this.input_entry.category = ev.target.value}
 					/>
 				</Card>
 				<Card>
 					<label htmlFor='input_date'>Datum:</label>
-					<Input style={{ width: "100%" }} type="date" id='input_date' defaultValue={normalizeDate(new Date())}
+					<Input style={{ width: "100%" }} type="date" inputId='input_date' defaultValue={normalizeDate(new Date())}
 						onChange={ev => this.input_entry.date = new Date(ev.target.value).toISOString()}
 					/>
 				</Card>
 				<Card>
-					<Input style={{ width: "100%" }} type="number" placeholder='Wert:'
+					<Input style={{ width: "100%" }} type="number" placeholder='Wert:' inputId='input_value_entry'
 						onChange={ev => this.input_entry.value = Number(ev.target.value)}
 					/>
 				</Card>
@@ -131,12 +131,12 @@ export class AddPage extends React.Component<{}, State> {
 		return(
 			<React.Fragment>
 				<Card>
-					<Input style={{width: '100%'}} placeholder='Kategorie:'
+					<Input style={{width: '100%'}} placeholder='Kategorie:' inputId='input_category_repeat'
 						onChange={(ev: any) => this.input_entry.category = ev.target.value} 
 						/>
 				</Card>
 				<Card>
-					<Input style={{width: '100%'}} type='number' placeholder='Wert:'
+					<Input style={{width: '100%'}} type='number' placeholder='Wert:' inputId='input_value_repeat'
 						onChange={(ev: any) => this.input_entry.value = Number(ev.target.value)}
 						/>
 				</Card>
@@ -168,13 +168,15 @@ export class AddPage extends React.Component<{}, State> {
 				</Card>
 				{this.state.repeattype === 'weekly' &&
 					<Card>
-						<Select id="weeklyrepeats" 
+						<Select id="weeklyrepeats"
 						style={{width: '100%'}}
+						select-id='weekly-input'
 						multiple
 						onChange={(ev: any) => {
 							let monthRepEl= document.querySelectorAll<any>('#weeklyrepeats option:checked');
 							this.input_repeat.repeats = Array.from(monthRepEl).map(r => {return Number(r.value)})
 						}
+						
 						}>
 							<option value='1'>Montag</option>
 							<option value='2'>Dienstag</option>

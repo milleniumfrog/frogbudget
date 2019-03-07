@@ -42,7 +42,7 @@ export async function getEntriesFromRepeat(repeat: Repeat, optEnd?: Date) {
 		else {
 			if(repeat.repeats.indexOf(beginDate.getDate()) >= 0) {
 				let entry: Entry = Object.assign({}, repeat.template, {date: beginDate.toISOString()})
-				if((new Date).getTime() >= new Date(entry.date).getTime())
+				if((new Date()).getTime() >= new Date(entry.date).getTime())
 					entries.push(entry)
 			}
 		}

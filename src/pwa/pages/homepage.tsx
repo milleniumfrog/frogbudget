@@ -54,7 +54,7 @@ class HomePage extends React.Component<Props, State>{
 					width={window.innerWidth-100}
 					isOpen={this.state.openMenu}
 					onClose={() => {this.setState({openMenu: false})}}
-					swipeable={true}>
+					>
 					<Page>
 						<this.MenuLeft />
 						<Card>
