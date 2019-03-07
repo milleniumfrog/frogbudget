@@ -44,7 +44,6 @@ describe('Frogbudget - Entries', () => {
 		cy.get('#input_submit').click()
 		cy.contains('bread');
 		cy.contains('-1.99€');
-		cy.screenshot();
 	});
 
 	it('create 30 test entries', () => {
@@ -59,7 +58,6 @@ describe('Frogbudget - Entries', () => {
 			cy.get('#input_date').type(`2019-02-${rand.length < 2 ? '0' + rand : rand}`)
 			cy.contains('Hinzufügen').click()
 			cy.get('.right').contains(`${totalprice.toFixed(2)} €`);
-			cy.screenshot();
 		}
 	});
 
