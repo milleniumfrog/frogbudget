@@ -1,12 +1,9 @@
-# Frogbudget alpha
+# Frogbudget
 
-Frogbudget is a progressive webapp for listing your incomes and outgoings. [milleniumfrog.github.io/frogbudget/#/](https://milleniumfrog.github.io/frogbudget/#/)
+Frogbudget is an Open Source Progressive Webapp which lists your incomes and outgoings.
+Everything will be stored on your device and you do not share any data with us, because nobody except you needs to know how much money you have.
 
-when you have problems (with the app) write me an mail
-[web@milleniumfrog.de](mailto://web@milleniumfrog.de) or use the issues tab
+[Link zur App](https://milleniumfrog.github.io/frogbudget/)
 
-if you want to use some code from this project, it is published under MIT License
-
-actual Changes:
-- v0.0.6
-	- small ui update on homepage
+v0.1.7
+- Add e2e Testing for future Version

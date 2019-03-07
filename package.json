@@ -1,7 +1,7 @@
 {
   "name": "frogbudget",
   "version": "0.1.7",
-  "description": "manage your bucks",
+  "description": "Frogbudget is an Open Source Progressive Webapp which lists your incomes and outgoings. https://milleniumfrog.github.io/frogbudget/",
   "scripts": {
     "test": "cypress run",
     "build": "webpack --config ./configs/prod.webpack.js && cp -f src/pwa/manifest.json docs/manifest.json",
