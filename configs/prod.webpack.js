@@ -4,10 +4,16 @@ const DefinePlugin = require('webpack').DefinePlugin;
 const VERSION = process.env.npm_package_version;
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const path = require('path');
+const Analyzer = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = merge(common, {
 	devtool: 'source-map',
 	plugins: [
+		new Analyzer({
+			analyzerMode: 'static',
+			openAnalyzer: false,
+			logLevel: 'info'
+		}),
 		new DefinePlugin({
 			PRODUCTION: JSON.stringify( true ),
 			VERSION: JSON.stringify(VERSION)
